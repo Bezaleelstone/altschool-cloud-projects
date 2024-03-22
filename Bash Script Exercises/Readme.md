@@ -61,13 +61,68 @@ for dir in "$@"; do
     echo "****************************************"
 
 done
-# sudo find /etc -type f -exec du -Sh {} + | sort -rh | head -n 5
-# du -h /etc 2>/dev/null | sort -rh | head -n 5
+```
+### RESULT:
+`./disk_usage.sh -d -n 7 /etc`
+
+![Output on Terminal](./img/bash_ss1.png)
+
+`./disk_usage.sh -d /etc`
+
+![Output on Terminal](./img/bash_ss2.png)
+
+`./disk_usage.sh -f /etc`
+
+![Output on Terminal](./img/bash_ss3.png)
+
+# TASK 2 - Create a backup script. 
+* This script creates a backup of a given directory and saves it in another directory with a timestamp. It takes two arguments: the source directory and the destination directory.
+
+>Note: The backup shoud be a TAR archive.
+
+>e.g ` ./yourscript.sh source_directory/ destination_directory ` should backup the contents of the source_directory saving the files into destination_directory, and coverting them into a tar archive format.
+
+## SOLUTION:
 
 ```
+#!/bin/bash
 
+#Define variables for arguments passed
+src=$1
+destination=$2
 
+#create time stamp
+timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 
+#Check if source argument passed is a directory
+if [ -z $src ]; then
+    echo "Usage: $0 <source_directory> <destination_directory>"
+    exit 1
+elif [ ! -d $src ]; then
+    echo " <$1> not a valid directory"
+    exit 1
+fi
+
+#Create destination directory if it doesn't exist
+if [ ! -d $destination ]; then
+    mkdir -p "$destination"
+fi
+
+echo "Backup in progress...."
+
+sleep 3
+
+tar -czf "$destination/$2_backup_$timestamp.tar.gz" "$src" 2>/dev/null
+
+echo "Backup successful"
+
+echo "*******************************"
+```
+
+### RESULT:
+`./test_backup.sh  `
+
+![Output on Terminal](./img/bash_ss4.png)
 
 
 

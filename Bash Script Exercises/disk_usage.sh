@@ -9,6 +9,7 @@ optstrings="dn:"
 help() {
     echo "Usage: $0 [-d -n N] directory"
     echo "Where N is an integer"
+    exit 1
 }
 
 #case statment for various options and arguments
