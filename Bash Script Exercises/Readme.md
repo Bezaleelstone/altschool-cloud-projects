@@ -63,17 +63,39 @@ for dir in "$@"; do
 done
 ```
 ### RESULT:
-`./disk_usage.sh -d -n 7 /etc`
+```
+vagrant@ubuntu-focal:~/bash_script$ ./disk_usage.sh -d -n 7 /etc
+****************************************
+524K    /etc/ssh/moduli
+204K    /etc/ssl/certs/ca-certificates.crt
+100K    /etc/lvm/lvm.conf
+88K     /etc/vmware-tools/vgauth/schemas/XMLSchema.xsd
+64K     /etc/udev/rules.d/70-snap.snapd.rules
+44K     /etc/grub.d/10_linux_zfs
+28K     /etc/ld.so.cache
+****************************************
+```
 
-![Output on Terminal](./img/bash_ss1.png)
+```
+vagrant@ubuntu-focal:~/bash_script$ ./disk_usage.sh -d /etc
+****************************************
+524K    /etc/ssh/moduli
+204K    /etc/ssl/certs/ca-certificates.crt
+100K    /etc/lvm/lvm.conf
+88K     /etc/vmware-tools/vgauth/schemas/XMLSchema.xsd
+64K     /etc/udev/rules.d/70-snap.snapd.rules
+44K     /etc/grub.d/10_linux_zfs
+28K     /etc/ld.so.cache
+28K     /etc/apparmor.d/usr.lib.snapd.snap-confine.real
+****************************************
+```
 
-`./disk_usage.sh -d /etc`
-
-![Output on Terminal](./img/bash_ss2.png)
-
-`./disk_usage.sh -f /etc`
-
-![Output on Terminal](./img/bash_ss3.png)
+```
+vagrant@ubuntu-focal:~/bash_script$ ./disk_usage.sh -f /etc
+./disk_usage.sh: illegal option -- f
+Usage: ./disk_usage.sh [-d -n N] directory
+Where N is an integer
+```
 
 # TASK 2 - Create a backup script. 
 * This script creates a backup of a given directory and saves it in another directory with a timestamp. It takes two arguments: the source directory and the destination directory.
@@ -120,9 +142,19 @@ echo "*******************************"
 ```
 
 ### RESULT:
-`./test_backup.sh  `
 
-![Output on Terminal](./img/bash_ss4.png)
+```vagrant@ubuntu-focal:~$ cd bash_script
+vagrant@ubuntu-focal:~/bash_script$ ./test_backup.sh /home/vagrant/source_backup/ test
+Backup in progress....
+Backup successful
+*******************************
+vagrant@ubuntu-focal:~/bash_script$ ls
+Readme.md  disk_usage.sh  img  test  test_backup.sh  test_cmd.sh
+vagrant@ubuntu-focal:~/bash_script$ cd test
+vagrant@ubuntu-focal:~/bash_script/test$ ls
+test_backup_2024-03-22_01-51-26.tar.gz
+vagrant@ubuntu-focal:~/bash_script/test$ 
+```
 
 
 
