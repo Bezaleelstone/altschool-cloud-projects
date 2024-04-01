@@ -1,0 +1,105 @@
+---
+
+- name: apache2
+  hosts: webservers
+  become: true
+  tasks:
+    - name: install apache web server
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == 'Debian'
+    
+    - name: start apache2 server
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+      when: ansible_os_family == 'Debian'
+
+    # - name: Install git on the target system
+    #   become: yes
+    #   apt:
+    #       name: git
+    #       state: present
+    #   when: ansible_os_family == 'Debian'
+
+    - name: copy our custom page
+      ansible.builtin.copy:
+        src: /home/vagrant/ansible/WP-Pusher-Altschool-Exercise/WP PUSHER/
+        dest: /var/www/html/
+        owner: root
+        group: root
+        mode: '0644'
+      when: ansible_os_family == 'Debian'
+    
+    # - name: clone git repository
+    #   git:
+    #     repo: https://github.com/Bezaleelstone/WP-Pusher-Altschool-Exercise.git
+    #     dest: home/vagrant/ansible
+    #     clone: yes
+    #   when: ansible_os_family == 'Debian'
+    
+    # - name: Copy your files to /var/www/html/
+    #   synchronize:
+    #     src: home/vagrant/ansible
+    #     dest: /var/www/html/
+    #     delete: yes
+
+    - name: restart apache
+      service: 
+        name: apache2
+        state: restarted
+      when: ansible_os_family == 'Debian'
+
+- name: http
+  hosts: webservers
+  become: true
+  tasks:
+    - name: install httpd web server
+      yum:
+        name: httpd
+        state: present
+      when: ansible_os_family == 'RedHat'
+    
+    - name: start httpd server
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_os_family == 'RedHat'
+
+    # - name: Install git on the target system
+    #   become: yes
+    #   yum:
+    #       name: git
+    #       state: present
+    #   when: ansible_os_family == 'RedHat'
+
+    - name: copy our custom page
+      ansible.builtin.copy:
+        src: /home/vagrant/ansible/WP-Pusher-Altschool-Exercise/WP PUSHER/
+        dest: /var/www/html/
+        owner: root
+        group: root
+        mode: '0644'
+      when: ansible_os_family == 'RedHat'
+    
+    # - name: clone git repository
+    #   git:
+    #     repo: https://github.com/Bezaleelstone/WP-Pusher-Altschool-Exercise.git
+    #     dest: home/vagrant/ansible
+    #     clone: yes
+    #   when: ansible_os_family == 'RedHat'
+
+    # - name: Copy your files to /var/www/html/
+    #   synchronize:
+    #     src: home/vagrant/ansible
+    #     dest: /var/www/html/
+    #     delete: yes
+
+    - name: restart httpd
+      service: 
+        name: httpd
+        state: restarted
+      when: ansible_os_family == 'RedHat'

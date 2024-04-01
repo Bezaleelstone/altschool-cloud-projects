@@ -1,0 +1,3 @@
+---
+default_variables_for_roles: "This is default variables for roles"
+server_name: apache2

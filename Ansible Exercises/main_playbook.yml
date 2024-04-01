@@ -1,0 +1,7 @@
+---
+
+- name: Role to install Apache2 on Debian and RedHat
+  hosts: webservers
+  become: true
+  roles:
+    - name: apache2
