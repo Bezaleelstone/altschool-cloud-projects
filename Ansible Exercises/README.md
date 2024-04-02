@@ -1,4 +1,4 @@
-# - Ansible Task: Deploy one an opensource websites using ansible. Your ansible slave will consist of one ubuntu node and one centos(rhel) node. Your master node can be of any Linux distribution of your choice (3 nodes in all). Explore using variables in ansible while executing this task.
+# - Ansible Task: Deploy an opensource website using ansible. Your ansible slave will consist of one ubuntu node and one centos(rhel) node. Your master node can be of any Linux distribution of your choice (3 nodes in all). Explore using variables in ansible while executing this task.
 ## SOLUTION:
 * Spin up three Linux machines using vagrant. Two ubuntu servers and one centos server. One of the ubuntu machines has been designated as the master-node while the other two machines are the slave-nodes.
 * The next step is to generate a ssh key for your master-node by running the command `ssh-keygen`. 
