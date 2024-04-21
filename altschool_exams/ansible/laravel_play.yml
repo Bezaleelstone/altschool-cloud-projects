@@ -1,0 +1,17 @@
+---
+- name: Execute Bash Script on Slave Node
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Run Script to deploy a Laravel/PHP app on slave node
+      script: /home/vagrant/altschool_exams/my_laravel_app.sh
+
+- name: Cron Job to check server up time
+  hosts: webservers
+  tasks:
+    - name: Create Cron Job to check server uptime every 12am midnight
+      cron:
+        name: "Check server uptime"
+        minute: "0"
+        hour: "0"
+        job: "uptime >> /home/vagrant/server_uptime.log"
