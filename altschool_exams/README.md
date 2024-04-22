@@ -260,14 +260,14 @@ Here I add another task in the playbook that executed a cron job at 12am midnigh
 
 The laravel app will be rendered to the IP address of the slave node after I run the ansible command `ansible-palybook -i ./hosts larave_play.yml`. 
 
-![showing output of ansible command](assets/screenshot1.png)
+![showing output of ansible command](assets/screen1.png)
 
 
-![showing rendered site](assets/screenshot2.png)
+![showing rendered site](assets/screen2.png)
 
 I can also confirm is my cronjob worked in my slave node but running `crontab -l` in the slave node.
 
-![showing cronjob on slave node](assets/screenshot3.png)
+![showing cronjob on slave node](assets/screen3.png)
 
 
 
